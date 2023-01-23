@@ -1,0 +1,43 @@
+<ng-container *ngIf="countries$ | async as countries" >
+  <p-table  [value]="countries" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Capital</th>
+        <th>Population</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-i="index" let-country>
+      <tr *ngIf="toItem(country); let item">
+        <td>{{ item.cca3 }}</td>
+        <td>{{ item.name.common}}</td>
+        <td>{{ item.capital }}</td>
+        <td>{{ item.population }}</td>
+      </tr>
+      </ng-template>
+  </p-table>
+</ng-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
