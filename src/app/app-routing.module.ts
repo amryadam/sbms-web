@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StoreModule } from '@ngrx/store';
+import { HomeComponent } from './home/home.component';
 
 export enum MAINROUTES {
   MASTER = 'masterdata',
@@ -28,6 +28,10 @@ const routes: Routes = [
       import('./master-data/master-data.module').then(
         (m) => m.MasterDataModule
       ),
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
   },
 ];
 

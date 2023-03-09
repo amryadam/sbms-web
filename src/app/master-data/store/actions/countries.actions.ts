@@ -1,4 +1,4 @@
-import {createAction, createActionGroup, emptyProps, props} from '@ngrx/store';
+import { createAction, createActionGroup, props } from '@ngrx/store';
 import { Country } from '../../models/country';
 
 export const LOAD_COUNTRIES = '[MasterData] Load Countries';
@@ -14,7 +14,10 @@ export const LOAD_COUNTRIES_SUCCESS = '[MasterData] Load Countries Success';
  */
 
 export const LoadCountries = createAction(LOAD_COUNTRIES);
-export const LoadCountriesFail = createAction(LOAD_COUNTRIES_FAIL);
+export const LoadCountriesFail = createAction(
+  LOAD_COUNTRIES_FAIL,
+  props<{ message: String }>()
+);
 export const LoadCountriesSuccess = createAction(
   LOAD_COUNTRIES_SUCCESS,
   props<{ payload: Country[] }>()
@@ -25,12 +28,11 @@ export const LoadCountriesSuccess = createAction(
  * so that reducers can easily compose action types
  */
 
-
 export const CountriesActions = createActionGroup({
-  source:'Countries',
-  events:{
-    Load:props<{countries:Country[]}>(),
-    Fail:emptyProps(),
-    Success:emptyProps()
-  }
-})
+  source: 'MasterData',
+  events: {
+    'Load Countries': props<{ message: String }>(),
+    'Load Countries Fail': props<{ message: String }>(),
+    'Load Countries Success': props<{ countries: Country[] }>(),
+  },
+});

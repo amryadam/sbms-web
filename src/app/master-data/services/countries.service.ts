@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Country } from '../models/country';
 
 @Injectable({
@@ -8,10 +8,10 @@ import { Country } from '../models/country';
 })
 export class CountriesService {
   private subject = new BehaviorSubject<Country[]>([]);
-  courses$: Observable<Country[]> = this.subject.asObservable();
+  countries$: Observable<Country[]> = this.subject.asObservable();
 
   constructor(private http: HttpClient) {
-    this.loadAllCountries()
+    this.loadAllCountries();
   }
 
   private loadAllCountries() {

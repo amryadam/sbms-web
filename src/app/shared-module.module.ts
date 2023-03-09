@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 
 import { TableModule } from 'primeng/table';
-import { Dialog, DialogModule } from 'primeng/dialog';
-import { ConfirmDialog, ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
@@ -16,10 +16,9 @@ import { FocusTrapModule } from 'primeng/focustrap';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TreeTableModule } from 'primeng/treetable';
 import { TreeModule } from 'primeng/tree';
-import { Footer, Header } from 'primeng/api';
 
 @NgModule({
-  imports:[
+  imports: [
     TableModule,
     DialogModule,
     ConfirmDialogModule,
