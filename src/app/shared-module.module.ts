@@ -16,43 +16,80 @@ import { FocusTrapModule } from 'primeng/focustrap';
 import { CheckboxModule } from 'primeng/checkbox';
 import { TreeTableModule } from 'primeng/treetable';
 import { TreeModule } from 'primeng/tree';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { InputTextModule } from 'primeng/inputtext';
+import { FileUploadModule } from 'primeng/fileupload';
+import { RippleModule } from 'primeng/ripple';
+import { ToastModule } from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { RatingModule } from 'primeng/rating';
+import { PasswordModule } from 'primeng/password';
 
 @NgModule({
-  imports: [
-    TableModule,
-    DialogModule,
-    ConfirmDialogModule,
-    DropdownModule,
-    MenubarModule,
-    ButtonModule,
-    ListboxModule,
-    RadioButtonModule,
-    PanelModule,
-    AccordionModule,
-    CalendarModule,
-    TabViewModule,
-    FocusTrapModule,
-    CheckboxModule,
-    TreeTableModule,
-    TreeModule,
-  ],
   exports: [
-    TableModule,
-    DialogModule,
-    ConfirmDialogModule,
-    DropdownModule,
-    MenubarModule,
-    ButtonModule,
-    ListboxModule,
-    RadioButtonModule,
-    PanelModule,
     AccordionModule,
+    ButtonModule,
     CalendarModule,
-    TabViewModule,
-    FocusTrapModule,
     CheckboxModule,
-    TreeTableModule,
+    ConfirmDialogModule,
+    DialogModule,
+    DropdownModule,
+    FileUploadModule,
+    FocusTrapModule,
+    InputNumberModule,
+    InputTextModule,
+    InputTextModule,
+    InputTextareaModule,
+    ListboxModule,
+    MenubarModule,
+    MultiSelectModule,
+    PanelModule,
+    RadioButtonModule,
+    RatingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RippleModule,
+    TabViewModule,
+    TableModule,
+    ToastModule,
+    ToolbarModule,
     TreeModule,
+    TreeTableModule,
+    PasswordModule,
+  ],
+  imports: [
+    AccordionModule,
+    ButtonModule,
+    CalendarModule,
+    CheckboxModule,
+    ConfirmDialogModule,
+    DialogModule,
+    DropdownModule,
+    FileUploadModule,
+    FocusTrapModule,
+    FormsModule,
+    InputNumberModule,
+    InputTextModule,
+    InputTextModule,
+    InputTextareaModule,
+    ListboxModule,
+    MenubarModule,
+    MultiSelectModule,
+    PanelModule,
+    RadioButtonModule,
+    RatingModule,
+    ReactiveFormsModule,
+    RippleModule,
+    TabViewModule,
+    TableModule,
+    ToastModule,
+    ToolbarModule,
+    TreeModule,
+    TreeTableModule,
+    PasswordModule,
   ],
 })
 export class SharedModule {}

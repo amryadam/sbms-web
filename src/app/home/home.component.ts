@@ -17,7 +17,6 @@ export class HomeComponent {
   ngOnInit(): void {
     this.getDemoInformation();
   }
-
   private getDemoInformation() {
     const token = sessionStorage.getItem('id_token');
     const bearerToken = `Bearer ${token}`;

@@ -19,6 +19,8 @@ import {
   StoreRouterConnectingModule,
 } from '@ngrx/router-store';
 import { HomeComponent } from './home/home.component';
+import { AppLayoutModule } from './layout/app.layout.module';
+import { AdministrationModule } from './administration/administration.module';
 
 @NgModule({
   declarations: [AppComponent, SharedComponent, HomeComponent],
@@ -38,6 +40,8 @@ import { HomeComponent } from './home/home.component';
       trace: false, //  If set to true, will include stack trace for every dispatched action, so you can see it in trace tab jumping directly to that part of code
       traceLimit: 75, // maximum stack trace frames to be stored (in case trace option was provided as true)
     }),
+    AppLayoutModule,
+    AdministrationModule,
     SharedModule,
   ],
   providers: [{ provide: RouterStateSerializer, useClass: CustomerSerializer }],

@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host 0.0.0.0",
+    "start": "ng serve --host 0.0.0.0 --configuration=production",
+    "star-dev": "ng serve --host 0.0.0.0 --configuration=development",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -25,8 +26,9 @@
     "@ngrx/store-devtools": "^15.1.0",
     "buffer": "^6.0.3",
     "crypto-js": "^4.1.1",
+    "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
-    "primeng": "^15.1.1",
+    "primeng": "^15.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
