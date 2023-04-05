@@ -1,0 +1,247 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card px-6 py-6">
+      <p-toast></p-toast>
+      <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+          <div class="my-2">
+            <button
+              (click)="openNew()"
+              class="p-button-success mr-2"
+              icon="pi pi-plus"
+              label="New"
+              pButton
+              pRipple></button>
+            <button
+              (click)="deleteSelectedCategories()"
+              [disabled]="!selectedCategories || !selectedCategories.length"
+              class="p-button-danger"
+              icon="pi pi-trash"
+              label="Delete"
+              pButton
+              pRipple></button>
+          </div>
+        </ng-template>
+
+        <ng-template pTemplate="right">
+          <div class="my-2">
+            <p-fileUpload
+              [maxFileSize]="1000000"
+              accept="image/*"
+              chooseLabel="Import"
+              class="mr-2 inline-block"
+              label="Import"
+              mode="basic"></p-fileUpload>
+            <button
+              (click)="dt.exportCSV()"
+              class="p-button-help"
+              icon="pi pi-upload"
+              label="Export"
+              pButton
+              pRipple></button>
+          </div>
+        </ng-template>
+      </p-toolbar>
+
+      <p-table
+        #dt
+        [(selection)]="selectedCategories"
+        [globalFilterFields]="['code', 'name']"
+        [paginator]="true"
+        [resizableColumns]="true"
+        [rowHover]="true"
+        [rowsPerPageOptions]="[10, 20, 30, 50]"
+        [rows]="10"
+        [rows]="20"
+        [showCurrentPageReport]="true"
+        [value]="categories"
+        columnResizeMode="expand"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        dataKey="id"
+        responsiveLayout="scroll"
+        selectionMode="multiple">
+        <ng-template pTemplate="caption">
+          <div
+            class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+            <h5 class="m-0">Manage Categories</h5>
+            <span class="block mt-2 md:mt-0 p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input
+                (input)="onGlobalFilter(dt, $event)"
+                class="w-full sm:w-auto"
+                pInputText
+                placeholder="Search..."
+                type="text" />
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3rem">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="code">
+              Code
+              <p-sortIcon field="code"></p-sortIcon>
+            </th>
+            <th pSortableColumn="name">
+              Name
+              <p-sortIcon field="name"></p-sortIcon>
+            </th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template let-item pTemplate="body">
+          <tr *ngIf="toItem(item); let category">
+            <td>
+              <p-tableCheckbox [value]="category"></p-tableCheckbox>
+            </td>
+            <td>
+              <span class="p-column-title">Code</span>
+              {{ category.code }}
+            </td>
+            <td>
+              <span class="p-column-title">Name</span>
+              {{ category.name }}
+            </td>
+            <td>
+              <div class="flex">
+                <button
+                  (click)="editCategory(category)"
+                  class="p-button-rounded p-button-success mr-2"
+                  icon="pi pi-pencil"
+                  pButton
+                  pRipple></button>
+                <button
+                  (click)="deleteCategory(category)"
+                  class="p-button-rounded p-button-warning"
+                  icon="pi pi-trash"
+                  pButton
+                  pRipple></button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <p-dialog
+      [(visible)]="categoryDialog"
+      [maximizable]="true"
+      [modal]="true"
+      [style]="{ width: '450px' }"
+      class="p-fluid"
+      header="Category Details">
+      <ng-template pTemplate="content">
+        <div class="field">
+          <label for="code">Code</label>
+          <input
+            [(ngModel)]="category.code"
+            [disabled]="true"
+            id="code"
+            pInputText
+            placeholder="Generated"
+            type="text" />
+        </div>
+        <div class="field">
+          <label for="name">Name</label>
+          <input
+            [(ngModel)]="category.name"
+            [ngClass]="{ 'ng-invalid ng-dirty': submitted && !category.name }"
+            autofocus
+            id="name"
+            pInputText
+            required
+            type="text" />
+          <small *ngIf="submitted && !category.name" class="ng-dirty ng-invalid"
+            >Name is required.</small
+          >
+        </div>
+        <div class="field">
+          <label class="mb-3">Parent Category</label>
+          <p-autoComplete
+            (completeMethod)="filterCategory($event)"
+            [(ngModel)]="category.parentCategory"
+            [dropdown]="true"
+            [suggestions]="parentCategories"
+            appendTo="body"
+            field="name"></p-autoComplete>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="footer">
+        <button
+          (click)="hideDialog()"
+          class="p-button-text"
+          icon="pi pi-times"
+          label="Cancel"
+          pButton
+          pRipple></button>
+        <button
+          (click)="saveCategory()"
+          class="p-button-text"
+          icon="pi pi-check"
+          label="Save"
+          pButton
+          pRipple></button>
+      </ng-template>
+    </p-dialog>
+
+    <p-dialog
+      [(visible)]="deleteCategoryDialog"
+      [modal]="true"
+      [style]="{ width: '450px' }"
+      header="Confirm">
+      <div class="flex align-items-center justify-content-center">
+        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+        <span *ngIf="category"
+          >Are you sure you want to delete <b>{{ category.name }}</b
+          >?</span
+        >
+      </div>
+      <ng-template pTemplate="footer">
+        <button
+          (click)="deleteCategoryDialog = false"
+          class="p-button-text"
+          icon="pi pi-times"
+          label="No"
+          pButton
+          pRipple></button>
+        <button
+          (click)="confirmDelete()"
+          class="p-button-text"
+          icon="pi pi-check"
+          label="Yes"
+          pButton
+          pRipple></button>
+      </ng-template>
+    </p-dialog>
+
+    <p-dialog
+      [(visible)]="deleteCategoriesDialog"
+      [modal]="true"
+      [style]="{ width: '450px' }"
+      header="Confirm">
+      <div class="flex align-items-center justify-content-center">
+        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+        <span>Are you sure you want to delete selected categories?</span>
+      </div>
+      <ng-template pTemplate="footer">
+        <button
+          (click)="deleteCategoriesDialog = false"
+          class="p-button-text"
+          icon="pi pi-times"
+          label="No"
+          pButton
+          pRipple></button>
+        <button
+          (click)="confirmDeleteSelected()"
+          class="p-button-text"
+          icon="pi pi-check"
+          label="Yes"
+          pButton
+          pRipple></button>
+      </ng-template>
+    </p-dialog>
+  </div>
+</div>

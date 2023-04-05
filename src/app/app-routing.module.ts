@@ -8,11 +8,18 @@ import { AuthorizedComponent } from './administration/authorized/authorized.comp
 export enum MAINROUTES {
   MASTER = 'masterdata',
   ADMIN = 'admin',
+  ORDERS = 'orders',
 }
 
 export enum MASTERDATA {
   COUNTRIES = 'countries',
   CUSTOMER = 'customer',
+  CATEGORIES = 'categories',
+  PRODUCTS = 'products',
+}
+
+export enum ORDERS {
+  ORDERS = 'orders',
 }
 
 export enum ADMIN {
@@ -41,9 +48,11 @@ const routes: Routes = [
       {
         path: MAINROUTES.MASTER,
         loadChildren: () =>
-          import('./master-data/master-data.module').then(
-            (m) => m.MasterDataModule
-          ),
+          import('./master-data/master-data.module').then((m) => m.MasterDataModule),
+      },
+      {
+        path: MAINROUTES.ORDERS,
+        loadChildren: () => import('./order/order.module').then((m) => m.OrderModule),
       },
     ],
   },

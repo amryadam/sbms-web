@@ -1,9 +1,5 @@
 import * as fromRouter from '@ngrx/router-store';
-import {
-  ActivatedRouteSnapshot,
-  Params,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Params, RouterStateSnapshot } from '@angular/router';
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 
 export interface RouterStateUrl {
@@ -21,13 +17,9 @@ export const reducers: ActionReducerMap<State> = {
 };
 
 export const getRouterState =
-  createFeatureSelector<fromRouter.RouterReducerState<RouterStateUrl>>(
-    'routerReducer'
-  );
+  createFeatureSelector<fromRouter.RouterReducerState<RouterStateUrl>>('routerReducer');
 
-export class CustomerSerializer
-  implements fromRouter.RouterStateSerializer<RouterStateUrl>
-{
+export class CustomerSerializer implements fromRouter.RouterStateSerializer<RouterStateUrl> {
   serialize(routerState: RouterStateSnapshot): RouterStateUrl {
     const { url } = routerState; // == url = routerState.url called de-structure like imports
     const { queryParams } = routerState.root;

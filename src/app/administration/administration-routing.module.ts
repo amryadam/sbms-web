@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: ADMIN.AUTH, component: AuthorizedComponent },
   { path: '', component: LoginComponent },
 ];
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],

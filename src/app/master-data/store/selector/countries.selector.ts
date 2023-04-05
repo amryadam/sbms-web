@@ -1,10 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { MasterDataState, selectMasterData } from '../reducers';
-import {
-  getCountriesEntities,
-  getCountryLoaded,
-  getCountryLoading,
-} from '../reducers/countries.reducer';
+import * as fromCountries from '../reducers/countries.reducer';
 import { getRouterState } from '../../../store';
 import { Country } from '../../models/country';
 
@@ -13,25 +9,22 @@ export const getCountriesState = createSelector(
   (state: MasterDataState) => state.countries
 );
 
-export const getAllCountries = createSelector(
+export const getCountriesEntities = createSelector(
   getCountriesState,
-  getCountriesEntities
+  fromCountries.getCountriesEntities
 );
 export const getCountriesLoading = createSelector(
   getCountriesState,
-  getCountryLoading
+  fromCountries.getCountryLoading
 );
-export const getCountriesLoaded = createSelector(
-  getCountriesState,
-  getCountryLoaded
-);
+export const getCountriesLoaded = createSelector(getCountriesState, fromCountries.getCountryLoaded);
 
 export const getSelectedCountry = createSelector(
-  getCountriesState,
+  getCountriesEntities,
   getRouterState,
-  (state, router): Country | undefined => {
-    return state.entities.find(
-      (country) => country.cca3 == router.state.params['countryId']
-    );
+  (entities, router): Country => {
+    return router.state && entities[router.state.params['countryId']];
   }
 );
+
+export const getAllCountries = createSelector(getCountriesEntities, fromCountries.getAllCountries);

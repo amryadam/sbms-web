@@ -33,7 +33,7 @@ export class LayoutService {
   };
 
   state: LayoutState = {
-    staticMenuDesktopInactive: false,
+    staticMenuDesktopInactive: true,
     overlayMenuActive: false,
     profileSidebarVisible: false,
     configSidebarVisible: false,
@@ -55,8 +55,7 @@ export class LayoutService {
     }
 
     if (this.isDesktop()) {
-      this.state.staticMenuDesktopInactive =
-        !this.state.staticMenuDesktopInactive;
+      this.state.staticMenuDesktopInactive = !this.state.staticMenuDesktopInactive;
     } else {
       this.state.staticMenuMobileActive = !this.state.staticMenuMobileActive;
 

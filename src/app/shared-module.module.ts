@@ -27,8 +27,11 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { RatingModule } from 'primeng/rating';
 import { PasswordModule } from 'primeng/password';
+import { CommonModule } from '@angular/common';
+import { ConvertArrayToStringPipe } from './util/convert-array-to-string.pipe';
 
 @NgModule({
+  declarations: [ConvertArrayToStringPipe],
   exports: [
     AccordionModule,
     ButtonModule,
@@ -59,6 +62,8 @@ import { PasswordModule } from 'primeng/password';
     TreeModule,
     TreeTableModule,
     PasswordModule,
+    CommonModule,
+    ConvertArrayToStringPipe,
   ],
   imports: [
     AccordionModule,
@@ -90,6 +95,7 @@ import { PasswordModule } from 'primeng/password';
     TreeModule,
     TreeTableModule,
     PasswordModule,
+    CommonModule,
   ],
 })
 export class SharedModule {}

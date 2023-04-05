@@ -1,19 +1,16 @@
 import { createReducer, on } from '@ngrx/store';
 import { Country } from '../../models/country';
-import {
-  LoadCountries,
-  LoadCountriesFail,
-  LoadCountriesSuccess,
-} from '../actions';
+import { CountriesActions } from '../actions';
+import { toCountriesEntities } from '../../../util/ConvertArrayToEntity';
 
 export interface CountryState {
-  entities: Country[];
+  entities: { [id: number | string]: Country };
   loaded: boolean;
   loading: boolean;
 }
 
 export const initialState: CountryState = {
-  entities: [],
+  entities: {},
   loaded: false,
   loading: false,
 };
@@ -21,7 +18,7 @@ export const initialState: CountryState = {
 export const reducer = createReducer(
   initialState,
   on(
-    LoadCountries,
+    CountriesActions.loadCountries,
     (state): CountryState => ({
       ...state,
       loaded: false,
@@ -29,7 +26,7 @@ export const reducer = createReducer(
     })
   ),
   on(
-    LoadCountriesFail,
+    CountriesActions.loadCountriesFail,
     (state): CountryState => ({
       ...state,
       loaded: false,
@@ -37,9 +34,9 @@ export const reducer = createReducer(
     })
   ),
   on(
-    LoadCountriesSuccess,
+    CountriesActions.loadCountriesSuccess,
     (state, action): CountryState => ({
-      entities: action.payload,
+      entities: toCountriesEntities(action.payload),
       loaded: true,
       loading: false,
     })
@@ -49,3 +46,5 @@ export const reducer = createReducer(
 export const getCountriesEntities = (state: CountryState) => state.entities;
 export const getCountryLoading = (state: CountryState) => state.loading;
 export const getCountryLoaded = (state: CountryState) => state.loaded;
+export const getAllCountries = (entities: { [id: string | number]: Country }) =>
+  Object.keys(entities).map((id) => entities[id]);

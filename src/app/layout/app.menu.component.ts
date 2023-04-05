@@ -15,9 +15,7 @@ export class AppMenuComponent implements OnInit {
     this.model = [
       {
         label: 'Home',
-        items: [
-          { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] },
-        ],
+        items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }],
       },
       {
         label: 'Auth',
@@ -63,14 +61,27 @@ export class AppMenuComponent implements OnInit {
                 icon: 'fa-solid fa-user-injured',
                 routerLink: [MAINROUTES.MASTER, MASTERDATA.CUSTOMER],
               },
-              {
-                label: 'Submenu 2.2',
-                icon: 'pi pi-fw pi-bookmark',
-                items: [
-                  { label: 'Submenu 2.2.1', icon: 'pi pi-fw pi-bookmark' },
-                ],
-              },
             ],
+          },
+          {
+            label: 'Categories',
+            icon: 'fa-solid fa-users-line',
+            routerLink: [MAINROUTES.MASTER, MASTERDATA.CATEGORIES],
+          },
+          {
+            label: 'Products',
+            icon: 'fa-solid fa-users-line',
+            routerLink: [MAINROUTES.MASTER, MASTERDATA.PRODUCTS],
+          },
+        ],
+      },
+      {
+        label: 'Orders ',
+        items: [
+          {
+            label: 'orders',
+            icon: 'pi pi-fw pi-globe',
+            routerLink: [MAINROUTES.ORDERS],
           },
         ],
       },

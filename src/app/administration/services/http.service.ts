@@ -12,8 +12,4 @@ export class HttpService {
   doGet(url: string, options: { headers: HttpHeaders }) {
     return this.httpClient.get(url, options);
   }
-
-  doPut() {
-    //etc
-  }
 }

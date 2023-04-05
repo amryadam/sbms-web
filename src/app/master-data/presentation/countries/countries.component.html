@@ -1,8 +1,6 @@
-
-
-<button pButton (click)="LoadCountries()" type="button" label="Load" ></button>
-<ng-container *ngIf="countries$ | async as countries" >
-  <p-table  [value]="countries" [tableStyle]="{ 'min-width': '50rem' }">
+<button (click)="LoadCountries()" label="Load" pButton type="button"></button>
+<ng-container *ngIf="countries$ | async as countries">
+  <p-table [tableStyle]="{ 'min-width': '50rem' }" [value]="countries">
     <ng-template pTemplate="header">
       <tr>
         <th>Code</th>
@@ -12,35 +10,12 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-i="index" let-country>
-      <tr *ngIf="toItem(country); let item" [routerLink]=[item.cca3]>
+      <tr *ngIf="toItem(country); let item" [routerLink]="[item.ccn3]">
         <td>{{ item.cca3 }}</td>
-        <td>{{ item.name.common}}</td>
+        <td>{{ item.name.common }}</td>
         <td>{{ item.capital }}</td>
         <td>{{ item.population }}</td>
       </tr>
-      </ng-template>
+    </ng-template>
   </p-table>
 </ng-container>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

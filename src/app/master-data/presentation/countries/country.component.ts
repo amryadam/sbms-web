@@ -11,7 +11,6 @@ import { Country } from '../../models/country';
 })
 export class CountryComponent {
   public country$: Observable<Country | undefined>;
-
   constructor(private store: Store<MasterDataState>) {
     this.country$ = store.select(getSelectedCountry);
   }

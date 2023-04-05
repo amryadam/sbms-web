@@ -25,10 +25,8 @@ export class AuthorizedComponent {
       .subscribe((tokens) => {
         if ((tokens as any)?.id_token) {
           sessionStorage.setItem('id_token', (tokens as any).id_token);
-          sessionStorage.setItem(
-            'refresh_token',
-            (tokens as any).refresh_token
-          );
+          sessionStorage.setItem('refresh_token', (tokens as any).refresh_token);
+          sessionStorage.setItem('access_token', (tokens as any).access_token);
           this.router.navigate([MAINROUTES.MASTER, MASTERDATA.COUNTRIES]);
         }
       });

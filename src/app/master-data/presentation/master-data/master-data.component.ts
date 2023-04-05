@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { LoadCountries, MasterDataState } from '../store';
 import { Store } from '@ngrx/store';
+import { CountriesActions, MasterDataState } from '../../store';
 
 @Component({
   selector: 'app-master-data',
@@ -9,6 +9,6 @@ import { Store } from '@ngrx/store';
 })
 export class MasterDataComponent {
   constructor(private store: Store<MasterDataState>) {
-    this.store.dispatch(LoadCountries());
+    this.store.dispatch(CountriesActions.loadCountries());
   }
 }

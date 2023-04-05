@@ -11,10 +11,7 @@ export class AppConfigComponent {
 
   scales: number[] = [12, 13, 14, 15, 16];
 
-  constructor(
-    public layoutService: LayoutService,
-    public menuService: MenuService
-  ) {}
+  constructor(public layoutService: LayoutService, public menuService: MenuService) {}
 
   get visible(): boolean {
     return this.layoutService.state.configSidebarVisible;
@@ -62,9 +59,7 @@ export class AppConfigComponent {
 
   changeTheme(theme: string, colorScheme: string) {
     const themeLink = <HTMLLinkElement>document.getElementById('theme-css');
-    const newHref = themeLink
-      .getAttribute('href')!
-      .replace(this.layoutService.config.theme, theme);
+    const newHref = themeLink.getAttribute('href')!.replace(this.layoutService.config.theme, theme);
     this.layoutService.config.colorScheme;
     this.replaceThemeLink(newHref, () => {
       this.layoutService.config.theme = theme;

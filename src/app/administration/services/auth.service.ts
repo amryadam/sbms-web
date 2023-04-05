@@ -14,8 +14,7 @@ export class AuthService {
     const mockUserClient = 'client';
     const mockUserSecret = 'secret';
     const basicAuth =
-      `Basic ` +
-      Buffer.from(`${mockUserClient}:${mockUserSecret}`).toString('base64');
+      `Basic ` + Buffer.from(`${mockUserClient}:${mockUserSecret}`).toString('base64');
     const headers = new HttpHeaders({
       'content-type': 'application/json',
       Authorization: basicAuth,

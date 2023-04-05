@@ -1,23 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Country } from '../models/country';
+import { Observable } from 'rxjs';
+import { HttpService } from '../../services/http.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CountriesService {
-  private subject = new BehaviorSubject<Country[]>([]);
-  countries$: Observable<Country[]> = this.subject.asObservable();
+  constructor(private http: HttpService) {}
 
-  constructor(private http: HttpClient) {
-    this.loadAllCountries();
-  }
-
-  private loadAllCountries() {
-    this.http
-      .get<Country[]>('https://restcountries.com/v3.1/all')
-      .pipe(tap((res) => this.subject.next(res)))
-      .subscribe();
+  getCountries(): Observable<Country[]> {
+    return this.http.get<Country[]>('https://restcountries.com/v3.1/all');
   }
 }

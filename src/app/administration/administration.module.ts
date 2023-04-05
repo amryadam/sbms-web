@@ -4,7 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { AuthorizedComponent } from './authorized/authorized.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from './services/token.interceptor';
+import { TokenInterceptor } from '../services/token.interceptor';
 import { SharedModule } from '../shared-module.module';
 
 @NgModule({
