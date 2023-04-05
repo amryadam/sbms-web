@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ConvertArrayToStringPipe implements PipeTransform {
   transform(value: any[] | null, ...args: any[]): string {
     return value?.reduce((accumulator, currentValue) => {
-      `${accumulator} , ${currentValue['name']}`;
+      return `${accumulator} , ${currentValue['name']}`;
     }, '');
   }
 }

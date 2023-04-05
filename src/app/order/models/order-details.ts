@@ -5,5 +5,4 @@ export interface OrderDetails {
   product: Product;
   pricePerItem: number;
   numberOfItems: number;
-  total: number;
 }

@@ -1,0 +1,63 @@
+<div>
+  <!--  <p-button (click)="op.toggle($event); loadCart()" icon="pi pi-shopping-cart"></p-button>-->
+  <button (click)="op.toggle($event); loadCart()" class="p-link layout-topbar-button">
+    <i class="pi pi-shopping-cart"></i>
+    <span>Cart</span>
+  </button>
+  <p-overlayPanel #op [showCloseIcon]="true" [style]="{ width: '550px' }">
+    <ng-template pTemplate>
+      <p-table
+        (onRowSelect)="op.hide()"
+        [(selection)]="selectedOrderDetails"
+        [paginator]="true"
+        [rows]="5"
+        [value]="orderDetail"
+        responsiveLayout="stack"
+        selectionMode="single">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="name" style="min-width: 12rem">
+              Name<p-sortIcon field="name"></p-sortIcon>
+            </th>
+            <th style="min-width: 5rem">Image</th>
+            <th pSortableColumn="price" style="min-width: 8rem">
+              Price <p-sortIcon field="price"></p-sortIcon>
+            </th>
+            <th style="max-width: 5rem">Number</th>
+          </tr>
+        </ng-template>
+        <ng-template let-details let-rowData pTemplate="body">
+          <ng-container *ngIf="toItem(details); let detail">
+            <tr [pSelectableRow]="rowData">
+              <td>{{ detail.product.name }}</td>
+              <td>
+                <img
+                  [alt]="detail.product.name"
+                  class="shadow-2"
+                  src="{{ detail.product.imageUri }}"
+                  width="50" />
+              </td>
+              <td>{{ detail.product.price | currency : "USD" }}</td>
+              <td>
+                <p-inputNumber
+                  (onInput)="addOrRemoveItem($event.value, detail)"
+                  [max]="100"
+                  [min]="0"
+                  [ngModel]="detail.numberOfItems"
+                  [showButtons]="true"
+                  inputId="minmax-buttons"
+                  mode="decimal">
+                </p-inputNumber>
+              </td>
+            </tr>
+          </ng-container>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="flex align-items-center justify-content-between">
+            Total Order {{ order.totalOrder }} for {{ order.totalItems }} Item in Total
+          </div>
+        </ng-template>
+      </p-table>
+    </ng-template>
+  </p-overlayPanel>
+</div>

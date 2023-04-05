@@ -29,6 +29,9 @@ import { RatingModule } from 'primeng/rating';
 import { PasswordModule } from 'primeng/password';
 import { CommonModule } from '@angular/common';
 import { ConvertArrayToStringPipe } from './util/convert-array-to-string.pipe';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { DataViewModule } from 'primeng/dataview';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
   declarations: [ConvertArrayToStringPipe],
@@ -64,6 +67,9 @@ import { ConvertArrayToStringPipe } from './util/convert-array-to-string.pipe';
     PasswordModule,
     CommonModule,
     ConvertArrayToStringPipe,
+    AutoCompleteModule,
+    DataViewModule,
+    OverlayPanelModule,
   ],
   imports: [
     AccordionModule,
@@ -96,6 +102,9 @@ import { ConvertArrayToStringPipe } from './util/convert-array-to-string.pipe';
     TreeTableModule,
     PasswordModule,
     CommonModule,
+    AutoCompleteModule,
+    DataViewModule,
+    OverlayPanelModule,
   ],
 })
 export class SharedModule {}

@@ -13,7 +13,7 @@ import { CustomerComponent } from './presentation/customer/customer.component';
 import { HttpService } from '../services/http.service';
 import { ProductComponent } from './presentation/product/product.component';
 import { CategoryComponent } from './presentation/category/category.component';
-import { AutoCompleteModule } from 'primeng/autocomplete';
+import { OrderModule } from '../order/order.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     MasterDataRoutingModule,
     StoreModule.forFeature('masterData', reducers),
     EffectsModule.forFeature(effects),
-    AutoCompleteModule,
+    OrderModule,
   ],
   providers: [HttpService],
 })

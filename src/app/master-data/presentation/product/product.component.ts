@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { Product } from '../../models/product';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import * as fromStore from '../../store';
-import { Table } from 'primeng/table';
-import { Category } from '../../models/category';
+import * as fromMasterDataStore from '../../store';
+import * as fromOrderStore from '../../../order/store';
+import { DataView } from 'primeng/dataview';
 
 @Component({
   selector: 'app-product',
@@ -12,105 +12,60 @@ import { Category } from '../../models/category';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent {
-  productDialog: boolean = false;
+  products$: Observable<Product[]>;
 
-  deleteProductDialog: boolean = false;
+  sortOptions: SelectItem[] = [];
 
-  deleteProductsDialog: boolean = false;
+  sortOrder: number = 0;
 
-  products: Product[] = [];
+  sortField: string = '';
 
-  product: Product;
+  orderCities: any[] = [];
 
-  selectedProducts: Product[] = [];
-
-  submitted: boolean = false;
-
-  rowsPerPageOptions = [5, 10, 20];
-
-  Products$: Observable<any>;
-  category: any;
-  categories: Category[];
-
-  constructor(private store: Store<fromStore.MasterDataState>) {}
+  constructor(
+    private store: Store<fromMasterDataStore.MasterDataState | fromOrderStore.OrdersState>
+  ) {}
 
   ngOnInit() {
-    this.store.dispatch(fromStore.ProductsActions.loadProducts());
-    this.store.select<any>(fromStore.getAllProducts).subscribe((c) => {
-      this.products = c;
-    });
-    this.store.select<any>(fromStore.getAllCategories).subscribe((c) => {
-      this.categories = c;
-    });
+    this.store.dispatch(fromMasterDataStore.ProductsActions.loadProducts());
+    this.products$ = this.store.select(fromMasterDataStore.getAllProducts);
+
+    this.sortOptions = [
+      { label: 'Price High to Low', value: '!price' },
+      { label: 'Price Low to High', value: 'price' },
+    ];
   }
 
-  loadCategories() {
-    this.store.dispatch(fromStore.CategoriesActions.loadCategories());
-    this.store.select<any>(fromStore.getAllCategories).subscribe((c) => {
-      this.categories = c;
-    });
-  }
+  onSortChange(event: any) {
+    const value = event.value;
 
-  openNew() {
-    this.product = { category: null, id: '' };
-    this.submitted = false;
-    this.loadCategories();
-    this.productDialog = true;
-  }
-
-  deleteSelectedProducts() {
-    this.deleteProductsDialog = true;
-  }
-
-  editProduct(product: Product) {
-    this.loadCategories();
-    this.product = { ...product };
-    this.productDialog = true;
-  }
-
-  deleteProduct(product: Product) {
-    this.deleteProductDialog = true;
-    this.product = product;
-  }
-
-  confirmDeleteSelected() {
-    this.deleteProductsDialog = false;
-    this.store.dispatch(
-      fromStore.ProductsActions.removeProductsList({ payload: this.selectedProducts })
-    );
-
-    this.selectedProducts = [];
-  }
-
-  confirmDelete() {
-    this.deleteProductDialog = false;
-    this.store.dispatch(fromStore.ProductsActions.removeProduct({ payload: this.product }));
-    this.product = { category: null, id: '' };
-  }
-
-  hideDialog() {
-    this.productDialog = false;
-    this.submitted = false;
-  }
-
-  saveProduct() {
-    this.submitted = true;
-    if (this.product.name?.trim()) {
-      if (this.product.id) {
-        this.store.dispatch(fromStore.ProductsActions.updateProduct({ payload: this.product }));
-      } else {
-        this.product.imageUri = 'https://loremflickr.com/320/240';
-        this.store.dispatch(fromStore.ProductsActions.createProduct({ payload: this.product }));
-      }
-      this.productDialog = false;
-      this.product = { category: null, id: '' };
+    if (value.indexOf('!') === 0) {
+      this.sortOrder = -1;
+      this.sortField = value.substring(1, value.length);
+    } else {
+      this.sortOrder = 1;
+      this.sortField = value;
     }
   }
 
-  onGlobalFilter(table: Table, event: Event) {
-    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  onFilter(dv: DataView, event: Event) {
+    dv.filter((event.target as HTMLInputElement).value);
   }
+
   toItem(item: any): Product {
     return item;
   }
+
+  addToCart(product: Product) {
+    this.store.dispatch(fromOrderStore.CartsActions.addItem({ payload: product }));
+  }
+}
+
+export interface SelectItem<T = any> {
+  label?: string;
+  value: T;
+  styleClass?: string;
+  icon?: string;
+  title?: string;
+  disabled?: boolean;
 }
