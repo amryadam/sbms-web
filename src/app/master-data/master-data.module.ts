@@ -14,6 +14,7 @@ import { HttpService } from '../services/http.service';
 import { ProductComponent } from './presentation/product/product.component';
 import { CategoryComponent } from './presentation/category/category.component';
 import { OrderModule } from '../order/order.module';
+import { ShoppingComponent } from './presentation/shopping/shopping.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { OrderModule } from '../order/order.module';
     CustomerComponent,
     ProductComponent,
     CategoryComponent,
+    ShoppingComponent,
   ],
   imports: [
     SharedModule,

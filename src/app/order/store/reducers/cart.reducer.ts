@@ -72,6 +72,30 @@ export const reducer = createReducer(
     };
 
     return { cart: cart };
+  }),
+  on(CartsActions.clearCarts, (state, action): CartState => {
+    const cart: Order = {
+      id: '',
+      code: '',
+      totalOrder: 0,
+      totalItems: 0,
+      detailsList: [],
+    };
+    return {
+      cart: cart,
+    };
+  }),
+  on(CartsActions.createOrderSuccess, (state, action): CartState => {
+    const cart: Order = {
+      id: '',
+      code: '',
+      totalOrder: 0,
+      totalItems: 0,
+      detailsList: [],
+    };
+    return {
+      cart: cart,
+    };
   })
 );
 

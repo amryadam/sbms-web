@@ -12,6 +12,7 @@ import { Order } from '../models/order';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent {
+  visibleSidebar: boolean = false;
   display: boolean = false;
   order: Order;
   total: Number;
@@ -39,5 +40,9 @@ export class CartComponent {
     } else {
       this.store.dispatch(fromStore.CartsActions.addItem({ payload: details.product }));
     }
+  }
+
+  CreateOrder() {
+    this.store.dispatch(fromStore.CartsActions.createOrder({ payload: this.order }));
   }
 }

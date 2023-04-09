@@ -32,6 +32,7 @@ import { ConvertArrayToStringPipe } from './util/convert-array-to-string.pipe';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DataViewModule } from 'primeng/dataview';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { SidebarModule } from 'primeng/sidebar';
 
 @NgModule({
   declarations: [ConvertArrayToStringPipe],
@@ -70,6 +71,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     AutoCompleteModule,
     DataViewModule,
     OverlayPanelModule,
+    SidebarModule,
   ],
   imports: [
     AccordionModule,
@@ -105,6 +107,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     AutoCompleteModule,
     DataViewModule,
     OverlayPanelModule,
+    SidebarModule,
   ],
 })
 export class SharedModule {}

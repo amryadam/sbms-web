@@ -13,8 +13,8 @@ export class HttpService {
     return this.http.get<T>(uri).pipe(catchError(this.handleError));
   }
 
-  post<T>(uri: string, payload?: any): Observable<any> {
-    return this.http.post<T>(uri, payload).pipe(catchError(this.handleError));
+  post<T>(uri: string, body?: any, headers?: any): Observable<any> {
+    return this.http.post<T>(uri, body, headers).pipe(catchError(this.handleError));
   }
 
   put<T>(uri: string, payload?: any): Observable<any> {

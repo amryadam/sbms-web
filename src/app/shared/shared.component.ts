@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { MenuItem } from 'primeng/api';
-import { ADMIN, MAINROUTES, MASTERDATA } from '../app-routing.module';
+import { ADMIN, MAIN_ROUTES, MASTER_DATA } from '../app-routing.module';
 
 @Component({
   selector: 'app-shared',
@@ -24,7 +24,7 @@ export class SharedComponent {
               {
                 label: 'Countries',
                 icon: 'pi pi-fw pi-bookmark',
-                routerLink: [MAINROUTES.MASTER, MASTERDATA.COUNTRIES],
+                routerLink: [MAIN_ROUTES.MASTER, MASTER_DATA.COUNTRIES],
               },
               {
                 label: 'Video',
@@ -134,12 +134,12 @@ export class SharedComponent {
       {
         label: 'Login',
         icon: 'pi pi-fw pi-sign-in',
-        routerLink: [MAINROUTES.ADMIN, ADMIN.LOGIN],
+        routerLink: [MAIN_ROUTES.ADMIN, ADMIN.LOGIN],
       },
       {
         label: 'LOGOUT',
         icon: 'pi pi-fw pi-sign-out',
-        routerLink: [MAINROUTES.ADMIN, ADMIN.LOGOUT],
+        routerLink: [MAIN_ROUTES.ADMIN, ADMIN.LOGOUT],
       },
     ];
   }

@@ -1,11 +1,21 @@
 <div>
   <!--  <p-button (click)="op.toggle($event); loadCart()" icon="pi pi-shopping-cart"></p-button>-->
-  <button (click)="op.toggle($event); loadCart()" class="p-link layout-topbar-button">
+  <!--  <button (click)="op.toggle($event); loadCart()" class="p-link layout-topbar-button">-->
+  <!--    <i class="pi pi-shopping-cart"></i>-->
+  <!--    <span>Cart</span>-->
+  <!--  </button>-->
+  <button (click)="visibleSidebar = true; loadCart()" pButton type="button">
     <i class="pi pi-shopping-cart"></i>
-    <span>Cart</span>
   </button>
-  <p-overlayPanel #op [showCloseIcon]="true" [style]="{ width: '550px' }">
-    <ng-template pTemplate>
+
+  <p-sidebar
+    [(visible)]="visibleSidebar"
+    [baseZIndex]="10000"
+    appendTo="body"
+    position="right"
+    styleClass="w-5">
+    <ng-template pTemplate="header">Cart</ng-template>
+    <ng-template pTemplate="content">
       <p-table
         (onRowSelect)="op.hide()"
         [(selection)]="selectedOrderDetails"
@@ -54,10 +64,20 @@
         </ng-template>
         <ng-template pTemplate="summary">
           <div class="flex align-items-center justify-content-between">
-            Total Order {{ order.totalOrder }} for {{ order.totalItems }} Item in Total
+            <!--            Total Order {{ order.totalOrder }} for {{ order.totalItems }} Item in Total-->
           </div>
         </ng-template>
-      </p-table>
+      </p-table></ng-template
+    >
+    <ng-template pTemplate="footer">
+      <!--      <p-button (click)="CreateOrder()" icon="pi pi-shopping-cart"> Confirm Order </p-button>-->
+      <button
+        (click)="CreateOrder()"
+        icon="fa-solid fa-credit-card"
+        label="Confirm Order"
+        pButton
+        pRipple></button>
     </ng-template>
-  </p-overlayPanel>
+  </p-sidebar>
+  <p-overlayPanel #op [showCloseIcon]="true" [style]="{ width: '550px' }"> </p-overlayPanel>
 </div>

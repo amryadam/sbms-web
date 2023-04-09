@@ -1,21 +1,20 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AppLayoutComponent } from './layout/app.layout.component';
-import { LoginComponent } from './administration/login/login.component';
-import { AuthorizedComponent } from './administration/authorized/authorized.component';
 
-export enum MAINROUTES {
+export enum MAIN_ROUTES {
   MASTER = 'masterdata',
   ADMIN = 'admin',
   ORDERS = 'orders',
 }
 
-export enum MASTERDATA {
+export enum MASTER_DATA {
   COUNTRIES = 'countries',
   CUSTOMER = 'customer',
   CATEGORIES = 'categories',
   PRODUCTS = 'products',
+  SHOPPING = 'shopping',
 }
 
 export enum ORDERS {
@@ -38,28 +37,29 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: MAINROUTES.ADMIN,
-        component: LoginComponent,
+        path: MAIN_ROUTES.ADMIN,
+        loadChildren: () =>
+          import('./administration/administration.module').then((m) => m.AdministrationModule),
+      },
+      // {
+      //   path: 'admin/authorized',
+      //   component: AuthorizedComponent,
+      // },
+      {
+        path: MAIN_ROUTES.ORDERS,
+        loadChildren: () => import('./order/order.module').then((m) => m.OrderModule),
       },
       {
-        path: 'admin/authorized',
-        component: AuthorizedComponent,
-      },
-      {
-        path: MAINROUTES.MASTER,
+        path: MAIN_ROUTES.MASTER,
         loadChildren: () =>
           import('./master-data/master-data.module').then((m) => m.MasterDataModule),
-      },
-      {
-        path: MAINROUTES.ORDERS,
-        loadChildren: () => import('./order/order.module').then((m) => m.OrderModule),
       },
     ],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

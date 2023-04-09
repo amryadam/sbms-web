@@ -3,18 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { CountriesComponent } from './presentation/countries/countries.component';
 import { MasterDataComponent } from './presentation/master-data/master-data.component';
 import { CountryComponent } from './presentation/countries/country.component';
-import { MASTERDATA } from '../app-routing.module';
+import { MASTER_DATA } from '../app-routing.module';
 import { CustomerComponent } from './presentation/customer/customer.component';
 import { CategoryComponent } from './presentation/category/category.component';
 import { ProductComponent } from './presentation/product/product.component';
+import { ShoppingComponent } from './presentation/shopping/shopping.component';
 
 const routes: Routes = [
   { path: '', component: MasterDataComponent },
-  { path: MASTERDATA.COUNTRIES, component: CountriesComponent },
+  { path: MASTER_DATA.COUNTRIES, component: CountriesComponent },
   { path: 'countries/:countryId', component: CountryComponent },
-  { path: MASTERDATA.CUSTOMER, component: CustomerComponent },
-  { path: MASTERDATA.CATEGORIES, component: CategoryComponent },
-  { path: MASTERDATA.PRODUCTS, component: ProductComponent },
+  { path: MASTER_DATA.CUSTOMER, component: CustomerComponent },
+  { path: MASTER_DATA.CATEGORIES, component: CategoryComponent },
+  { path: MASTER_DATA.PRODUCTS, component: ProductComponent },
+  { path: MASTER_DATA.SHOPPING, component: ShoppingComponent },
 ];
 
 @NgModule({

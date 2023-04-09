@@ -7,7 +7,7 @@ export const CartsActions = createActionGroup({
   source: 'Cart',
   events: {
     // create order Action
-    'Create Order': emptyProps(),
+    'Create Order': props<{ payload: Order }>(),
     'Create Order Fail': props<{ message: any }>(),
     'Create Order Success': props<{ payload: Order }>(),
     // add item to cart action

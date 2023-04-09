@@ -12,12 +12,13 @@ import { MessageService, PrimeNGConfig } from 'primeng/api';
 
 import { SharedModule } from './shared-module.module';
 import { SharedComponent } from './shared/shared.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { RouterStateSerializer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { HomeComponent } from './home/home.component';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { AdministrationModule } from './administration/administration.module';
+import { ErrorInterceptor } from './administration/services/token.interceptor';
 
 @NgModule({
   declarations: [AppComponent, SharedComponent, HomeComponent],
@@ -41,7 +42,15 @@ import { AdministrationModule } from './administration/administration.module';
     AdministrationModule,
     SharedModule,
   ],
-  providers: [{ provide: RouterStateSerializer, useClass: CustomerSerializer }, MessageService],
+  providers: [
+    { provide: RouterStateSerializer, useClass: CustomerSerializer },
+    MessageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

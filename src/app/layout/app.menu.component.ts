@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
-import { MAINROUTES, MASTERDATA } from '../app-routing.module';
+import { MAIN_ROUTES, MASTER_DATA } from '../app-routing.module';
 
 @Component({
   selector: 'app-menu',
@@ -48,7 +48,7 @@ export class AppMenuComponent implements OnInit {
               {
                 label: 'Countries',
                 icon: 'fa-regular fa-flag',
-                routerLink: [MAINROUTES.MASTER, MASTERDATA.COUNTRIES],
+                routerLink: [MAIN_ROUTES.MASTER, MASTER_DATA.COUNTRIES],
               },
             ],
           },
@@ -59,19 +59,24 @@ export class AppMenuComponent implements OnInit {
               {
                 label: 'Customer',
                 icon: 'fa-solid fa-user-injured',
-                routerLink: [MAINROUTES.MASTER, MASTERDATA.CUSTOMER],
+                routerLink: [MAIN_ROUTES.MASTER, MASTER_DATA.CUSTOMER],
               },
             ],
           },
           {
             label: 'Categories',
             icon: 'fa-solid fa-users-line',
-            routerLink: [MAINROUTES.MASTER, MASTERDATA.CATEGORIES],
+            routerLink: [MAIN_ROUTES.MASTER, MASTER_DATA.CATEGORIES],
+          },
+          {
+            label: 'Shopping',
+            icon: 'fa-solid fa-basket-shopping',
+            routerLink: [MAIN_ROUTES.MASTER, MASTER_DATA.SHOPPING],
           },
           {
             label: 'Products',
             icon: 'fa-solid fa-users-line',
-            routerLink: [MAINROUTES.MASTER, MASTERDATA.PRODUCTS],
+            routerLink: [MAIN_ROUTES.MASTER, MASTER_DATA.PRODUCTS],
           },
         ],
       },
@@ -80,8 +85,8 @@ export class AppMenuComponent implements OnInit {
         items: [
           {
             label: 'orders',
-            icon: 'pi pi-fw pi-globe',
-            routerLink: [MAINROUTES.ORDERS],
+            icon: 'fa-solid fa-shop',
+            routerLink: [MAIN_ROUTES.ORDERS],
           },
         ],
       },
